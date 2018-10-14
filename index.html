@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/images/football.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <title>The Catch</title>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+</head>
+
+<body>
+    <!-- Jumbotron for title ALWAYS DISPLAYED! -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4"><strong>The Catch</strong></h1>
+            <button type="submit" id="logoutBtn" class="btn btn-primary">Log Out</button>
+        </div>
+    </div>
+    <!-- login Widget that shows only at startup from bootstrap-->
+    <div id="login">
+        <form class="login">
+            <div class="error"></div>
+            <div class="form-group">
+                <label for="emailInput">Email address</label>
+                <input type="email" class="form-email" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone.</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Password</label>
+                <input type="password" class="form-password" id="passwordInput" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="createAccount">
+                <label class="checkbox" for="createAccount">I'm New!(create an account with the credentials above)</label>
+            </div>
+            <button type="submit" id="loginBtn" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!--  once logged in rest of page loads and login widget disappears... user information is displayed -->
+    <div id="main">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-header">PICK TEAMS</h5>
+                        <div id="pickTeams"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body scores">
+                        <h5 class="card-header">WELCOME TO THE CATCH</h5>
+                        <p class="dir"><strong>Think you know your football?</strong> Here is your opportunity to make
+                            your picks and compete with others who think so too.</p>
+                        <p class="dir">Make your weekly picks as far in advance as you wish - change your picks if you
+                            wish; but be done by Thursday of every week for the following week.</p>
+                        <p class="dir">A correct pick gets you two points; no pick results in a one point penalty; a
+                            tie gets you a point.</p>
+                        <p class="dir">Winner is determined by the most points at the end of the regular season.
+                            <strong>HAVE FUN!</strong></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body scores">
+                        <h5 class="card-header">YOUR WEEKLY BREAKDOWN</h5>
+                        <table id="tableYour">
+                            <tr>
+                                <th>Week</th>
+                                <th>Points</th>
+                            </tr>
+                            <tr>
+                                <td>Week 1</td>
+                                <td id="w1">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 2</td>
+                                <td id="w2">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 3</td>
+                                <td id="w3">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 4</td>
+                                <td id="w4">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 5</td>
+                                <td id="w5">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 6</td>
+                                <td id="w6">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 7</td>
+                                <td id="w7">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 8</td>
+                                <td id="w8">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 9</td>
+                                <td id="w9">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 10</td>
+                                <td id="w10">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 11</td>
+                                <td id="w11">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 12</td>
+                                <td id="w12">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 13</td>
+                                <td id="w13">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 14</td>
+                                <td id="w14">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 15</td>
+                                <td id="w15">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 16</td>
+                                <td id="w16">0</td>
+                            </tr>
+                            <tr>
+                                <td>Week 17</td>
+                                <td id="w17">0</td>
+                            </tr>
+                            <tr>
+                                <th>Total</th>
+                                <th id="wkTot">0</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body scores">
+                        <h5 class="card-header">LEADER BOARD</h5>
+                        <table id="tableLeaders">
+                            <tr>
+                                <th>Name</th>
+                                <th>Points</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="assets/script/main.js"></script>
+    <script src="assets/script/api2.js"></script>
+    <script src="assets/script/dynamic.js"></script>
+    <script src="assets/script/scorevalid.js"></script>
+    <script src="assets/script/api.js"></script>
+    <script src="assets/script/newuser.js"></script>
+    <script src="assets/script/api.js"></script>
+</body>
+
+</html>
